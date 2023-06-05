@@ -3,7 +3,7 @@
 NodeJS / Typescript SDK for Icecast APIs
 
 ## Icecast APIs
-https://icecast.org/docs/icecast-trunk/server_stats/
+https://icecast.org/docs/icecast-trunk/server_stats/ \
 https://icecast.org/docs/icecast-trunk/admin_interface/
 
 ## Install
