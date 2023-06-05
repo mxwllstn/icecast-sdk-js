@@ -1,4 +1,5 @@
 # Icecast SDK for JavaScript
+[![Version](https://img.shields.io/npm/v/icecast-sdk-js.svg)](https://www.npmjs.org/package/icecast-sdk-js)
 
 NodeJS / Typescript SDK for Icecast APIs
 
