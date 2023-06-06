@@ -10,7 +10,7 @@
   "dependencies": {
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "icecast-sdk-js": "^1.0.2-beta",
+    "icecast-sdk-js": "^1.0.3-beta",
     "morgan-body": "^2.6.6"
   },
   "devDependencies": {
