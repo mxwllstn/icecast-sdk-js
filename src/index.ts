@@ -1,5 +1,4 @@
 import axios from 'axios'
-import xml2js from 'xml2js'
 
 export interface IcecastStats {
   admin: string
@@ -31,70 +30,29 @@ export interface IcecastSource {
 export type IcecastSources = IcecastSource[]
 class IcecastServer {
   host: string
-  admin?: { username: string; password: string }
   static default: typeof IcecastServer
-  constructor(host: string, admin?: { username: string; password: string }) {
-    (this.host = host), (this.admin = admin)
+  constructor(host: string) {
+    (this.host = host)
   }
 
   getStats = async (): Promise<IcecastStats> => {
-    if (this.admin?.username && this.admin?.password) {
-      return this.getStatsAdmin()
-    } else {
-      const req = (await axios.get(`${this.host}/status-json.xsl`)).data
-      const data = req?.icestats || JSON.parse(req.replace('"title":-,', '"title":"-",')).icestats
-      if (data?.source) {
-        data.source = Array.isArray(data.source)
-          ? data.source.map((source: any) => {
-              const mount = '/' + source?.listenurl?.split('/').pop()
-              return {
-                mount,
-                ...source
-              }
-            })
-          : {
-              mount: data.source.listenurl.split('/').pop(),
-              ...data.source
+  
+    const req = (await axios.get(`${this.host}/status-json.xsl`)).data
+    const data = req?.icestats || JSON.parse(req.replace('"title":-,', '"title":"-",')).icestats
+    if (data?.source) {
+      data.source = Array.isArray(data.source)
+        ? data.source.map((source: any) => {
+            const mount = '/' + source?.listenurl?.split('/').pop()
+            return {
+              mount,
+              ...source
             }
-      }
-      return data
-    }
-  }
-
-  getStatsAdmin = async (): Promise<IcecastStats> => {
-    if (!this.admin?.username || !this.admin?.password) {
-      throw new Error('admin username and password required')
-    }
-    const xml = (
-      await axios.get(`${this.host}/admin/stats`, {
-        auth: {
-          username: this.admin.username,
-          password: this.admin.password
-        }
-      })
-    ).data
-
-    const data = (
-      await xml2js.parseStringPromise(xml, {
-        trim: true,
-        explicitArray: false
-      })
-    ).icestats
-
-    data.source = Array.isArray(data.source)
-      ? data.source.map((source: { mount?: string; $: any }) => {
-          source.mount = source.$.mount
-          delete source.$
-          return {
-            mount: source.mount,
-            ...source
+          })
+        : {
+            mount: data.source.listenurl.split('/').pop(),
+            ...data.source
           }
-        })
-      : {
-          mount: data.source.$.mount,
-          ...data.source
-        }
-    delete data.source.$
+    }
     return data
   }
 
@@ -108,38 +66,6 @@ class IcecastServer {
     return sources && sources.filter(source => source.mount === `/${mountpoint}`)?.[0]
   }
 
-  getClients = async (mountpoint: string): Promise<any> => {
-    if (!this.admin?.username || !this.admin?.password) {
-      throw new Error('admin username and password required')
-    }
-    const xml = (
-      await axios.get(`${this.host}/admin/listclients`, {
-        params: {
-          mount: `/${mountpoint}`
-        },
-        auth: {
-          username: this.admin.username,
-          password: this.admin.password
-        }
-      })
-    ).data
-
-    console.log(xml)
-
-    const data = (
-      await xml2js.parseStringPromise(xml, {
-        trim: true,
-        explicitArray: false
-      })
-    ).icestats
-
-    data.source = {
-      mount: data.source.$.mount,
-      ...data.source
-    }
-    delete data.source.$
-    return data
-  }
 }
 
 /* exports for commonjs and es6 */
