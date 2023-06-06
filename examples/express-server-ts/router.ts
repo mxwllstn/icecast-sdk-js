@@ -1,13 +1,9 @@
 import express, { Router, Request, Response } from 'express'
 import IcecastServer from 'icecast-sdk-js'
 
-const { IC_HOST, IC_USERNAME, IC_PASSWORD } = process.env || {}
+const { IC_HOST } = process.env || {}
 
-/* non-admin endpoints */
-// const ic = new IcecastServer(<string>IC_HOST)
-
-/* admin endpoints */
-const ic = new IcecastServer(<string>IC_HOST, { username: <string>IC_USERNAME, password: <string>IC_PASSWORD })
+const ic = new IcecastServer(<string>IC_HOST)
 
 const { getStats, getSources, getSource, getClients } = ic
 
