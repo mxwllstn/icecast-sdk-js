@@ -22,8 +22,6 @@ yarn add icecast-sdk-js
 import IcecastServer from 'icecast-sdk-js'
 // for client endpoints
 const ic = new IcecastServer(process.env.IC_HOST)
-// for admin endpoints
-const ic = new IcecastServer(process.env.IC_HOST, { username: process.env.IC_USERNAME, password: process.env.IC_PASSWORD })
 
 ;(async () => {
   const stats = await ic.getStats()
