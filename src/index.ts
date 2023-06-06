@@ -32,11 +32,10 @@ class IcecastServer {
   host: string
   static default: typeof IcecastServer
   constructor(host: string) {
-    (this.host = host)
+    this.host = host
   }
 
   getStats = async (): Promise<IcecastStats> => {
-  
     const req = (await axios.get(`${this.host}/status-json.xsl`)).data
     const data = req?.icestats || JSON.parse(req.replace('"title":-,', '"title":"-",')).icestats
     if (data?.source) {
@@ -65,7 +64,6 @@ class IcecastServer {
     const sources = await this.getSources()
     return sources && sources.filter(source => source.mount === `/${mountpoint}`)?.[0]
   }
-
 }
 
 /* exports for commonjs and es6 */

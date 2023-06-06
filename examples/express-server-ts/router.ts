@@ -56,13 +56,4 @@ router.get('/sources/:mountpoint', async (req: Request, res: Response): Promise<
   }
 })
 
-router.get('/clients/:mountpoint', async (req: Request, res: Response): Promise<void> => {
-  try {
-    const { mountpoint } = req.params || {}
-    handleResponse(res, { status: 200, data: (await getClients(mountpoint)) as any })
-  } catch (error: any) {
-    handleError(res, error)
-  }
-})
-
 export default router
