@@ -42,14 +42,14 @@ class IcecastServer {
     if (data?.source) {
       data.source = Array.isArray(data.source)
         ? data.source.map((source: any) => {
-            const mount = '/' + source?.listenurl?.split('/').pop()
+            const mount = `/${source?.listenurl?.split('/').pop()}`
             return {
               mount,
               ...source
             }
           })
         : {
-            mount: data.source.listenurl.split('/').pop(),
+            mount: `/${data.source.listenurl.split('/').pop()}`,
             ...data.source
           }
     }
