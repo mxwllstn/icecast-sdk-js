@@ -20,8 +20,9 @@ yarn add icecast-sdk-js
 ## Usage
 ```javascript
 import IcecastServer from 'icecast-sdk-js'
-// for client endpoints
-const ic = new IcecastServer(process.env.IC_HOST)
+
+const hostUrl = 'http://yourip:port/mounpoint-you-specified'
+const ic = new IcecastServer(hostUrl)
 
 ;(async () => {
   const stats = await ic.getStats()
