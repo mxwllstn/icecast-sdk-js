@@ -21,7 +21,7 @@ yarn add icecast-sdk-js
 ```javascript
 import IcecastServer from 'icecast-sdk-js'
 
-const hostUrl = 'http://yourip:port/mounpoint-you-specified'
+const hostUrl = 'http://locahost:8000'
 const ic = new IcecastServer(hostUrl)
 
 ;(async () => {
