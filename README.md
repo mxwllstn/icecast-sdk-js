@@ -18,6 +18,7 @@ yarn add icecast-sdk-js
 ```
 
 ## Usage
+### Get Stats
 ```javascript
 import IcecastServer from 'icecast-sdk-js'
 
@@ -27,5 +28,23 @@ const ic = new IcecastServer(hostUrl)
 ;(async () => {
   const stats = await ic.getStats()
   console.log(stats)
+})()
+```
+  
+### Update Source Title (Requires Icecast Server admin username and password)
+```javascript
+import IcecastServer from 'icecast-sdk-js'
+const { IC_HOST, IC_USERNAME, IC_PASSWORD } = process.env || {}
+const ic = new IcecastServer(IC_HOST, { username: IC_USERNAME, password: IC_PASSWORD })
+
+;(async () => {
+  const mountpoint = 'testmountpoint'
+  const title = 'test title'
+  try {
+    const source = await ic.updateSource(mountpoint, title)
+    console.log(source)
+  } catch (error) {
+    console.log(error.response.data)
+  }
 })()
 ```
