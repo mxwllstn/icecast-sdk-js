@@ -1,11 +1,11 @@
 import express from 'express'
 import IcecastServer from 'icecast-sdk-js'
 
-const { IC_HOST } = process.env || {}
+const { IC_HOST, IC_USERNAME, IC_PASSWORD } = process.env || {}
 
-const ic = new IcecastServer(IC_HOST)
+const ic = new IcecastServer(IC_HOST, { username: IC_USERNAME, password: IC_PASSWORD })
 
-const { getStats, getSources, getSource, getClients } = ic
+const { getStats, getSources, getSource, updateSource } = ic
 const router = express.Router()
 
 const handleResponse = (res, response) => {
@@ -44,6 +44,16 @@ router.get('/sources/:mountpoint', async (req, res) => {
   try {
     const { mountpoint } = req.params || {}
     handleResponse(res, { status: 200, data: await getSource(mountpoint) })
+  } catch (error) {
+    handleError(res, error)
+  }
+})
+
+router.put('/sources/:mountpoint', async (req, res) => {
+  try {
+    const { mountpoint } = req.params || {}
+    const { metadata } = req.body || {}
+    handleResponse(res, { status: 200, data: await updateSource(mountpoint, metadata) })
   } catch (error) {
     handleError(res, error)
   }

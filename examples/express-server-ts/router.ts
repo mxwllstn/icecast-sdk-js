@@ -1,11 +1,11 @@
 import express, { Router, Request, Response } from 'express'
 import IcecastServer from 'icecast-sdk-js'
 
-const { IC_HOST } = process.env || {}
+const { IC_HOST, IC_USERNAME, IC_PASSWORD } = process.env || {}
 
-const ic = new IcecastServer(<string>IC_HOST)
+const ic = new IcecastServer(<string>IC_HOST, { username: <string>IC_USERNAME, password: <string>IC_PASSWORD })
 
-const { getStats, getSources, getSource, getClients } = ic
+const { getStats, getSources, getSource, updateSource } = ic
 
 const router = <Router>express.Router()
 
@@ -51,6 +51,16 @@ router.get('/sources/:mountpoint', async (req: Request, res: Response): Promise<
   try {
     const { mountpoint } = req.params || {}
     handleResponse(res, { status: 200, data: (await getSource(mountpoint)) as any })
+  } catch (error: any) {
+    handleError(res, error)
+  }
+})
+
+router.put('/sources/:mountpoint', async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { mountpoint } = req.params || {}
+    const { metadata } = req.body || {}
+    handleResponse(res, { status: 200, data: (await updateSource(mountpoint, metadata)) as any })
   } catch (error: any) {
     handleError(res, error)
   }
