@@ -30,9 +30,10 @@ export interface IcecastSource {
 export type IcecastSources = IcecastSource[]
 class IcecastServer {
   host: string
+  admin?: { username: string; password: string }
   static default: typeof IcecastServer
-  constructor(host: string) {
-    this.host = host
+  constructor(host: string, admin?: { username: string; password: string }) {
+    (this.host = host), (this.admin = admin)
   }
 
   getStats = async (): Promise<IcecastStats> => {
@@ -61,8 +62,35 @@ class IcecastServer {
   }
 
   getSource = async (mountpoint: string): Promise<IcecastSource | null> => {
+    if (!mountpoint) {
+      throw new Error('mountpoint required')
+    }
     const sources = await this.getSources()
     return sources && sources.filter(source => source.mount === `/${mountpoint}`)?.[0]
+  }
+
+  updateSource = async (mountpoint: string, metadata: string): Promise<IcecastSource | any> => {
+    if (!this.admin?.username || !this.admin?.password) {
+      throw new Error('admin username and password required')
+    }
+    if (!mountpoint) {
+      throw new Error('mountpoint required')
+    }
+    if (!metadata) {
+      throw new Error('metadata required')
+    }
+    const data = await axios.get(`${this.host}/admin/metadata`, {
+      auth: {
+        username: this.admin.username,
+        password: this.admin.password
+      },
+      params: {
+        mount: `/${mountpoint}`,
+        mode: 'updinfo',
+        song: metadata
+      }
+    })
+    return data.status === 200 ? { ...(await this.getSource(mountpoint)), ...(metadata && { title: metadata }) } : data
   }
 }
 
