@@ -33,8 +33,10 @@ const handleError = (res: Response, error: any) => {
 
 router.get('/stats', async (req: Request, res: Response): Promise<void> => {
   try {
+    console.log({ ic })
     handleResponse(res, { status: 200, data: (await getStats()) as any })
   } catch (error: any) {
+    console.log({ error })
     handleError(res, error)
   }
 })
