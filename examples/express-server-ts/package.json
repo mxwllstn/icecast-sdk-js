@@ -1,6 +1,6 @@
 {
   "name": "icecast-sdk-ts-example",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "main": "dist/server.js",
   "types": "dist/server.d.ts",
   "license": "MIT",
@@ -22,7 +22,7 @@
     "typescript": "^5.4.5"
   },
   "devDependencies": {
-    "eslint": "^9.4.0",
+    "eslint": "^8.57.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^5.1.3",
