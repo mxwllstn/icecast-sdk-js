@@ -1,0 +1,12 @@
+{
+  "name": "icecast-sdk-js-example-cjs",
+  "version": "0.0.0",
+  "author": "Max Stein <maxwell.stein@gmail.com> (https://maxstein.net",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "icecast-sdk-js": "1.0.12-beta"
+  }
+}

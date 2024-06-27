@@ -3,13 +3,13 @@ import IcecastServer from 'icecast-sdk-js'
 
 const { IC_HOST, IC_USERNAME, IC_PASSWORD } = process.env || {}
 
-const ic = new IcecastServer(<string>IC_HOST, { username: <string>IC_USERNAME, password: <string>IC_PASSWORD })
+const ic = new IcecastServer((IC_HOST as string), { username: IC_USERNAME as string, password: IC_PASSWORD as string })
 
 const { getStats, getSources, getSource, updateSource } = ic
 
-const router = <Router>express.Router()
+const router = express.Router() as Router
 
-export type ApiResponse = {
+export interface ApiResponse {
   status: number
   data: Record<string, unknown>
 }
@@ -25,7 +25,6 @@ const handleError = (res: Response, error: any) => {
     res.status(status).send({ data })
   } else {
     const { message } = error
-    // eslint-disable-next-line no-console
     console.log(message)
     res.status(400).send({ error: message })
   }
@@ -62,7 +61,7 @@ router.put('/sources/:mountpoint', async (req: Request, res: Response): Promise<
   try {
     const { mountpoint } = req.params || {}
     const { metadata } = req.body || {}
-    handleResponse(res, { status: 200, data: (await updateSource(mountpoint, metadata)) as any })
+    handleResponse(res, { status: 200, data: (await updateSource(mountpoint, metadata)) })
   } catch (error: any) {
     handleError(res, error)
   }

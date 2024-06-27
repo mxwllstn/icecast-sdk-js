@@ -25,7 +25,7 @@ import IcecastServer from 'icecast-sdk-js'
 const hostUrl = 'http://locahost:8000'
 const ic = new IcecastServer(hostUrl)
 
-;(async () => {
+void (async () => {
   const stats = await ic.getStats()
   console.log(stats)
 })()
@@ -38,7 +38,7 @@ import IcecastServer from 'icecast-sdk-js'
 const { IC_HOST, IC_USERNAME, IC_PASSWORD } = process.env || {}
 const ic = new IcecastServer(IC_HOST, { username: IC_USERNAME, password: IC_PASSWORD })
 
-;(async () => {
+void (async () => {
   const mountpoint = 'testmountpoint'
   const title = 'test title'
   try {
