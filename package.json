@@ -1,6 +1,6 @@
 {
   "name": "icecast-sdk-js",
-  "version": "1.0.12-beta",
+  "version": "1.0.13-beta",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -30,9 +30,9 @@ export interface IcecastSource {
 export type IcecastSources = IcecastSource[]
 class IcecastServer {
   host: string
-  admin?: { username: string; password: string }
+  admin?: { username: string, password: string }
   static default: typeof IcecastServer
-  constructor(host: string, admin?: { username: string; password: string }) {
+  constructor(host: string, admin?: { username: string, password: string }) {
     (this.host = host), (this.admin = admin)
   }
 
@@ -42,15 +42,15 @@ class IcecastServer {
     if (data?.source) {
       data.source = Array.isArray(data.source)
         ? data.source.map((source: any) => {
-            const mount = `/${source?.listenurl?.split('/').pop()}`
-            return {
-              mount,
-              ...source
-            }
-          })
+          const mount = `/${source?.listenurl?.split('/').pop()}`
+          return {
+            mount,
+            ...source,
+          }
+        })
         : {
             mount: `/${data.source.listenurl.split('/').pop()}`,
-            ...data.source
+            ...data.source,
           }
     }
     return data
@@ -66,10 +66,14 @@ class IcecastServer {
       throw new Error('mountpoint required')
     }
     const sources = await this.getSources()
-    return sources && sources.filter(source => source.mount === `/${mountpoint}`)?.[0]
+    const source = sources?.filter(source => source.mount === `/${mountpoint}`)?.[0] ?? null
+    if (!source) {
+      throw new Error('source does not exist at mountpoint')
+    }
+    return source
   }
 
-  updateSource = async (mountpoint: string, metadata: string): Promise<IcecastSource | any> => {
+  updateSource = async (mountpoint: string, metadata: string): Promise<any> => {
     if (!this.admin?.username || !this.admin?.password) {
       throw new Error('admin username and password required')
     }
@@ -79,23 +83,21 @@ class IcecastServer {
     if (!metadata) {
       throw new Error('metadata required')
     }
+    const source = await this.getSource(mountpoint)
     const data = await axios.get(`${this.host}/admin/metadata`, {
       auth: {
         username: this.admin.username,
-        password: this.admin.password
+        password: this.admin.password,
       },
       params: {
         mount: `/${mountpoint}`,
         mode: 'updinfo',
-        song: metadata
-      }
+        song: metadata,
+      },
     })
-    return data.status === 200 ? { ...(await this.getSource(mountpoint)), ...(metadata && { title: metadata }) } : data
+    const response = data.status === 200 ? { ...source, ...(metadata && { title: metadata }) } as IcecastSource : data
+    return response
   }
 }
 
-/* exports for commonjs and es6 */
-module.exports = IcecastServer
-module.exports.Icecast = IcecastServer
-module.exports.default = IcecastServer
 export default IcecastServer
