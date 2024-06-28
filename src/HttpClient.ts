@@ -8,10 +8,10 @@ interface RequestOptions {
   body?: Record<string, string>
 }
 
-class Api {
+class HttpClient {
   host: string
   admin: IcecastAdminParams
-  static default: typeof Api
+  static default: typeof HttpClient
   constructor(host: string, admin: IcecastAdminParams) {
     (this.host = host, this.admin = admin)
   }
@@ -55,4 +55,4 @@ class Api {
   }
 }
 
-export default Api
+export default HttpClient

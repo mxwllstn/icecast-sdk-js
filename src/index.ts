@@ -1,4 +1,4 @@
-import Api from './Api.js'
+import HttpClient from './HttpClient.js'
 import endpoints from './endpoints.js'
 
 export interface IcecastStats {
@@ -37,15 +37,15 @@ export type IcecastSources = IcecastSource[]
 class IcecastServer {
   host: string
   admin: IcecastAdminParams
-  api: Api
+  httpClient: HttpClient
   static default: typeof IcecastServer
   constructor(host: string, admin: IcecastAdminParams = {}) {
     (this.host = host), (this.admin = admin)
-    this.api = new Api(host, admin)
+    this.httpClient = new HttpClient(host, admin)
   }
 
   async getStats(): Promise<IcecastStats> {
-    const req = await this.api.makeRequest(endpoints.getStats) as any
+    const req = await this.httpClient.makeRequest(endpoints.getStats) as any
     const data = req?.icestats || JSON.parse(req?.replace('"title":-,', '"title":"-",'))?.icestats
     if (data?.source) {
       data.source = Array.isArray(data.source)
@@ -95,7 +95,7 @@ class IcecastServer {
       song: metadata,
     }
     /* 3825 character limit */
-    const data = await this.api.makeRequest(endpoints.updateSource, { params }) as any
+    const data = await this.httpClient.makeRequest(endpoints.updateSource, { params }) as any
     const response = data.status === 200 ? { ...source, ...(metadata && { title: metadata }) } as IcecastSource : data
     return response
   }
