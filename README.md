@@ -8,7 +8,11 @@ https://icecast.org/docs/icecast-trunk/server_stats/ \
 https://icecast.org/docs/icecast-trunk/admin_interface/
 
 ## Install
-Use `npm` to install the module
+Use `pnpm` to install the module
+```bash
+pnpm install icecast-sdk-js
+```
+Or use `npm` to install the module
 ```bash
 npm install icecast-sdk-js
 ```
