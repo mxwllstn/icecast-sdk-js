@@ -1,5 +1,5 @@
 export interface Endpoint {
-  method: 'CREATE' | 'GET' | 'PUT' | 'DELETE'
+  method: 'POST' | 'GET' | 'PUT' | 'DELETE'
   path: string
   args: string[]
   auth: boolean
