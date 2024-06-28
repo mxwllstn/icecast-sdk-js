@@ -1,4 +1,5 @@
-import axios from 'axios'
+import Api from './Api.js'
+import endpoints from './endpoints.js'
 
 export interface IcecastStats {
   admin: string
@@ -27,18 +28,25 @@ export interface IcecastSource {
   dummy: null
 }
 
+export interface IcecastAdminParams {
+  username?: string
+  password?: string
+}
+
 export type IcecastSources = IcecastSource[]
 class IcecastServer {
   host: string
-  admin?: { username: string, password: string }
+  admin: IcecastAdminParams
+  api: Api
   static default: typeof IcecastServer
-  constructor(host: string, admin?: { username: string, password: string }) {
+  constructor(host: string, admin: IcecastAdminParams = {}) {
     (this.host = host), (this.admin = admin)
+    this.api = new Api(host, admin)
   }
 
   getStats = async (): Promise<IcecastStats> => {
-    const req = (await axios.get(`${this.host}/status-json.xsl`)).data
-    const data = req?.icestats || JSON.parse(req.replace('"title":-,', '"title":"-",')).icestats
+    const req = await this.api.makeRequest(endpoints.getStats) as any
+    const data = req?.icestats || JSON.parse(req?.replace('"title":-,', '"title":"-",'))?.icestats
     if (data?.source) {
       data.source = Array.isArray(data.source)
         ? data.source.map((source: any) => {
@@ -74,9 +82,6 @@ class IcecastServer {
   }
 
   updateSource = async (mountpoint: string, metadata: string): Promise<any> => {
-    if (!this.admin?.username || !this.admin?.password) {
-      throw new Error('admin username and password required')
-    }
     if (!mountpoint) {
       throw new Error('mountpoint required')
     }
@@ -84,17 +89,13 @@ class IcecastServer {
       throw new Error('metadata required')
     }
     const source = await this.getSource(mountpoint)
-    const data = await axios.get(`${this.host}/admin/metadata`, {
-      auth: {
-        username: this.admin.username,
-        password: this.admin.password,
-      },
-      params: {
-        mount: `/${mountpoint}`,
-        mode: 'updinfo',
-        song: metadata,
-      },
-    })
+    const params = {
+      mount: `/${mountpoint}`,
+      mode: 'updinfo',
+      song: metadata,
+    }
+    /* 3825 character limit */
+    const data = await this.api.makeRequest(endpoints.updateSource, { params }) as any
     const response = data.status === 200 ? { ...source, ...(metadata && { title: metadata }) } as IcecastSource : data
     return response
   }

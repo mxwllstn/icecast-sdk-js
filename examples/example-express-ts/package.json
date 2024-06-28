@@ -1,5 +1,5 @@
 {
-  "name": "icecast-sdk-ts-example",
+  "name": "icecast-sdk-example-express-ts",
   "version": "0.0.0",
   "type": "module",
   "main": "dist/server.js",
@@ -13,11 +13,11 @@
     "postinstall": "npm run build"
   },
   "dependencies": {
+    "icecast-sdk-js": "1.0.14",
     "@types/express": "^4.17.21",
     "@types/node": "^20.14.9",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "icecast-sdk-js": "../..",
     "morgan-body": "^2.6.9",
     "typescript": "^5.5.2"
   },
