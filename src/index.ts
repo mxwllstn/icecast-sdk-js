@@ -44,7 +44,7 @@ class IcecastServer {
     this.api = new Api(host, admin)
   }
 
-  getStats = async (): Promise<IcecastStats> => {
+  async getStats(): Promise<IcecastStats> {
     const req = await this.api.makeRequest(endpoints.getStats) as any
     const data = req?.icestats || JSON.parse(req?.replace('"title":-,', '"title":"-",'))?.icestats
     if (data?.source) {
@@ -64,12 +64,12 @@ class IcecastServer {
     return data
   }
 
-  getSources = async (): Promise<IcecastSources | null> => {
-    const { source } = (await this.getStats()) || {}
+  async getSources(): Promise<IcecastSources | null> {
+    const { source } = await this.getStats() || {}
     return source ? (Array.isArray(source) ? source : [source]) : null
   }
 
-  getSource = async (mountpoint: string): Promise<IcecastSource | null> => {
+  async getSource(mountpoint: string): Promise<IcecastSource | null> {
     if (!mountpoint) {
       throw new Error('mountpoint required')
     }
@@ -81,7 +81,7 @@ class IcecastServer {
     return source
   }
 
-  updateSource = async (mountpoint: string, metadata: string): Promise<any> => {
+  async updateSource(mountpoint: string, metadata: string): Promise<any> {
     if (!mountpoint) {
       throw new Error('mountpoint required')
     }

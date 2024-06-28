@@ -14,12 +14,13 @@ export interface ApiResponse {
   data: Record<string, unknown>
 }
 
-const handleResponse = (res: Response, response: ApiResponse) => {
+function handleResponse(res: Response, response: ApiResponse) {
   const { status, data } = response
   console.log(response)
   res.status(status || 200).send(data)
 }
-const handleError = (res: Response, error: any) => {
+
+function handleError(res: Response, error: any) {
   if (error.response) {
     const { status, data } = error.response
     res.status(status).send({ data })

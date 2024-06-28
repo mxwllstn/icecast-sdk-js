@@ -16,13 +16,13 @@ class Api {
     (this.host = host, this.admin = admin)
   }
 
-  checkHost = () => {
+  checkHost(): void {
     if (!this.host) {
       throw new IcecastServerError('Host is missing.')
     }
   }
 
-  makeRequest = async (endpoint: Endpoint, options?: RequestOptions): Promise<unknown> => {
+  async makeRequest(endpoint: Endpoint, options?: RequestOptions): Promise<unknown> {
     const { params, body } = options ?? {}
     this.checkHost()
     const baseUrl = this.host
