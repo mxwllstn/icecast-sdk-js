@@ -21,8 +21,8 @@ importers:
         specifier: ^4.19.2
         version: 4.19.2
       icecast-sdk-js:
-        specifier: ../..
-        version: link:../..
+        specifier: latest
+        version: 1.0.15
       morgan-body:
         specifier: ^2.6.9
         version: 2.6.9
@@ -370,6 +370,10 @@ packages:
     resolution: {integrity: sha512-FtwrG/euBzaEjYeRqOgly7G0qviiXoJWnvEH2Z1plBdXgbyjv34pHTSb9zoeHMyDy33+DWy5Wt9Wo+TURtOYSQ==}
     engines: {node: '>= 0.8'}
 
+  icecast-sdk-js@1.0.15:
+    resolution: {integrity: sha512-z2TmyZTZxBS8TxInJDytILUTxtNMjX95JwDIHCwXc55uOBzZDttAmdzfodkpmR2algb9d4dOm5TnjuBpuFsB2Q==}
+    engines: {node: '>=18'}
+
   iconv-lite@0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
     engines: {node: '>=0.10.0'}
@@ -405,8 +409,8 @@ packages:
     engines: {node: '>=4'}
     hasBin: true
 
-  moment-timezone@0.5.45:
-    resolution: {integrity: sha512-HIWmqA86KcmCAhnMAN0wuDOARV/525R2+lOLotuGFzn4HO+FH+/645z2wx0Dt3iDv6/p61SIvKnDstISainhLQ==}
+  moment-timezone@0.5.48:
+    resolution: {integrity: sha512-f22b8LV1gbTO2ms2j2z13MuPogNoh5UzxL3nzNAYKGraILnbGc9NEE6dyiiiLv46DGRb8A4kg8UKWLjPthxBHw==}
 
   moment@2.30.1:
     resolution: {integrity: sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==}
@@ -879,6 +883,8 @@ snapshots:
       statuses: 2.0.1
       toidentifier: 1.0.1
 
+  icecast-sdk-js@1.0.15: {}
+
   iconv-lite@0.4.24:
     dependencies:
       safer-buffer: 2.1.2
@@ -901,7 +907,7 @@ snapshots:
 
   mime@1.6.0: {}
 
-  moment-timezone@0.5.45:
+  moment-timezone@0.5.48:
     dependencies:
       moment: 2.30.1
 
@@ -910,7 +916,7 @@ snapshots:
   morgan-body@2.6.9:
     dependencies:
       es6-symbol: 3.1.4
-      moment-timezone: 0.5.45
+      moment-timezone: 0.5.48
       on-finished: 2.4.1
       on-headers: 1.0.2
 

@@ -9,5 +9,15 @@ importers:
   .:
     dependencies:
       icecast-sdk-js:
-        specifier: ../../
-        version: link:../..
+        specifier: latest
+        version: 1.0.15
+
+packages:
+
+  icecast-sdk-js@1.0.15:
+    resolution: {integrity: sha512-z2TmyZTZxBS8TxInJDytILUTxtNMjX95JwDIHCwXc55uOBzZDttAmdzfodkpmR2algb9d4dOm5TnjuBpuFsB2Q==}
+    engines: {node: '>=18'}
+
+snapshots:
+
+  icecast-sdk-js@1.0.15: {}

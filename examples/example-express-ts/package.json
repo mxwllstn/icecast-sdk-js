@@ -13,11 +13,11 @@
     "postinstall": "npm run build"
   },
   "dependencies": {
-    "icecast-sdk-js": "1.0.15",
     "@types/express": "^4.17.21",
     "@types/node": "^20.14.9",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "icecast-sdk-js": "latest",
     "morgan-body": "^2.6.9",
     "typescript": "^5.5.2"
   },
