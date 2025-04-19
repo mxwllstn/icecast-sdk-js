@@ -1,5 +1,6 @@
 import HttpClient from './HttpClient.js'
 import endpoints from './endpoints.js'
+import { fixUtf8 } from './utils.js'
 
 export interface IcecastStats {
   admin: string
@@ -53,7 +54,7 @@ class IcecastServer {
           const mount = `/${source?.listenurl?.split('/').pop()}`
           return {
             mount,
-            ...source,
+            ...Object.fromEntries(Object.entries(source).map(([key, val]) => [key, fixUtf8(val)])),
           }
         })
         : {
