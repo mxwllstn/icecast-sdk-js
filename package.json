@@ -25,10 +25,10 @@
   "scripts": {
     "build": "npm run build-clean && npm run build-esm && npm run build-cjs",
     "build-clean": "rm -rf dist",
-    "build-esm": "npx tsc",
-    "build-cjs": "npx rollup dist/index.js --file dist/index.cjs --format cjs",
-    "lint": "npx eslint .",
-    "lint:fix": "npx eslint --fix .",
+    "build-esm": "tsc --project ./tsconfig.build.json",
+    "build-cjs": "rollup dist/index.js --file dist/index.cjs --format cjs",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "prepublish": "npm run lint && npm run build",
     "release": "npm run lint && npm run build && bumpp && npm publish"
   },
@@ -37,16 +37,16 @@
     "url": "https://github.com/mxwllstn/icecast-sdk-js"
   },
   "devDependencies": {
-    "@eslint/js": "^9.5.0",
-    "@stylistic/eslint-plugin": "^2.3.0",
-    "@types/node": "^20.14.9",
-    "eslint": "^8.57.0",
-    "globals": "^15.6.0",
-    "lint-staged": "^15.2.7",
-    "rollup": "^4.18.0",
-    "tsx": "^4.15.7",
-    "typescript": "^5.5.2",
-    "typescript-eslint": "^7.14.1"
+    "@eslint/js": "^9.25.0",
+    "@stylistic/eslint-plugin": "^4.2.0",
+    "@types/node": "^22.14.1",
+    "bumpp": "^10.1.0",
+    "eslint": "^9.25.0",
+    "globals": "^16.0.0",
+    "lint-staged": "^15.5.1",
+    "rollup": "^4.40.0",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.30.1"
   },
   "engines": {
     "node": ">=18"
@@ -59,8 +59,5 @@
       "prettier --write"
     ]
   },
-  "packageManager": "pnpm@9.3.0+sha512.ee7b93e0c2bd11409c6424f92b866f31d3ea1bef5fbe47d3c7500cdc3c9668833d2e55681ad66df5b640c61fa9dc25d546efa54d76d7f8bf54b13614ac293631",
-  "dependencies": {
-    "bumpp": "^10.1.0"
-  }
+  "packageManager": "pnpm@9.3.0+sha512.ee7b93e0c2bd11409c6424f92b866f31d3ea1bef5fbe47d3c7500cdc3c9668833d2e55681ad66df5b640c61fa9dc25d546efa54d76d7f8bf54b13614ac293631"
 }

@@ -41,22 +41,23 @@ class IcecastServer {
   httpClient: HttpClient
   static default: typeof IcecastServer
   constructor(host: string, admin: IcecastAdminParams = {}) {
-    (this.host = host), (this.admin = admin)
+    this.host = host
+    this.admin = admin
     this.httpClient = new HttpClient(host, admin)
   }
 
   async getStats(): Promise<IcecastStats> {
     const req = await this.httpClient.makeRequest(endpoints.getStats) as any
-    const data = req?.icestats || JSON.parse(req?.replace('"title":-,', '"title":"-",'))?.icestats
+    const data = req?.icestats ?? JSON.parse(req?.replace('"title":-,', '"title":"-",'))?.icestats
     if (data?.source) {
       data.source = Array.isArray(data.source)
         ? data.source.map((source: any) => {
-          const mount = `/${source?.listenurl?.split('/').pop()}`
-          return {
-            mount,
-            ...Object.fromEntries(Object.entries(source).map(([key, val]) => [key, fixUtf8(val)])),
-          }
-        })
+            const mount = `/${source?.listenurl?.split('/').pop()}`
+            return {
+              mount,
+              ...Object.fromEntries(Object.entries(source).map(([key, val]) => [key, fixUtf8(val)])),
+            }
+          })
         : {
             mount: `/${data.source.listenurl.split('/').pop()}`,
             ...data.source,

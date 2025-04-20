@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const IcecastServer = require('icecast-sdk-js')
 
 const hostUrl = 'http://locahost:8000'

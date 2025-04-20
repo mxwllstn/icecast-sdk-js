@@ -59,7 +59,7 @@ router.get('/sources/:mountpoint', async (req: Request, res: Response): Promise<
 router.put('/sources/:mountpoint', async (req: Request, res: Response): Promise<void> => {
   try {
     const { mountpoint } = req.params || {}
-    const { metadata } = req.body || {}
+    const { metadata } = req.body ?? {}
     handleResponse(res, { status: 200, data: (await ic.updateSource(mountpoint, metadata)) })
   } catch (error: any) {
     handleError(res, error)

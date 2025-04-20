@@ -13,7 +13,8 @@ class HttpClient {
   admin: IcecastAdminParams
   static default: typeof HttpClient
   constructor(host: string, admin: IcecastAdminParams) {
-    (this.host = host, this.admin = admin)
+    this.host = host
+    this.admin = admin
   }
 
   checkHost(): void {

@@ -9,7 +9,7 @@ export default tseslint.config(
   ...tseslint.configs.recommended,
   ...tseslint.configs.stylistic,
   ...tseslint.configs.stylisticTypeChecked,
-  stylistic.configs['recommended-flat'],
+  stylistic.configs.recommended,
   {
     languageOptions: {
       parserOptions: {
@@ -20,14 +20,6 @@ export default tseslint.config(
         ...globals.node,
       },
     },
-  },
-  {
-    files: ['**/*.js'],
-    rules: {
-      '@typescript-eslint/no-var-requires': 'off',
-    },
-  },
-  {
     files: ['**/*.js', '**/*.ts'],
     rules: {
       'space-before-function-paren': [
@@ -60,6 +52,7 @@ export default tseslint.config(
       '@typescript-eslint/restrict-template-expressions': 'off',
       // revisit - stylisticTypeChecked
       '@typescript-eslint/non-nullable-type-assertion-style': 'off',
+      '@typescript-eslint/switch-exhaustiveness-check': 'error',
     },
   },
   {

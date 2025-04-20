@@ -7,7 +7,7 @@
   "author": "Max Stein <maxwell.stein@gmail.com> (https://maxstein.net",
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf dist && npx tsc",
+    "build": "rm -rf dist && tsc",
     "dev": "node --env-file=.env --import=tsx --watch ./src/server.ts",
     "serve": "node dist/server.js",
     "postinstall": "npm run build"
