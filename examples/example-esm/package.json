@@ -8,6 +8,6 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "icecast-sdk-js": "latest"
+    "icecast-sdk-js": "^1.0.16"
   }
 }
