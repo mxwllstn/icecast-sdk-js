@@ -42,7 +42,9 @@ export interface GetSourcesOptions {
 }
 
 const sortIcecastSources = (sources: IcecastSources, field: keyof IcecastSource, sortOrder = 'asc') => {
-  return sortOrder === 'desc' ? sources.sort((a: any, b: any) => b[field] - a[field]) : sources.sort((a: any, b: any) => a[field] - b[field])
+  return sortOrder === 'desc'
+    ? sources.sort((a: any, b: any) => b[field].localeCompare(a[field]))
+    : sources.sort((a: any, b: any) => a[field].localeCompare(b[field]))
 }
 
 class IcecastServer {
