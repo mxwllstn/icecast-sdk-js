@@ -35,6 +35,16 @@ export interface IcecastAdminParams {
 }
 
 export type IcecastSources = IcecastSource[]
+
+export interface GetSourcesOptions {
+  sortBy?: keyof IcecastSource
+  sortOrder: 'asc' | 'desc'
+}
+
+const sortIcecastSources = (sources: IcecastSources, field: keyof IcecastSource, sortOrder = 'asc') => {
+  return sortOrder === 'desc' ? sources.sort((a: any, b: any) => b[field] - a[field]) : sources.sort((a: any, b: any) => a[field] - b[field])
+}
+
 class IcecastServer {
   host: string
   admin: IcecastAdminParams
@@ -66,9 +76,10 @@ class IcecastServer {
     return data
   }
 
-  async getSources(): Promise<IcecastSources | null> {
+  async getSources(options?: GetSourcesOptions): Promise<IcecastSources | null> {
+    const { sortBy = 'mount', sortOrder = 'asc' } = options ?? {}
     const { source } = await this.getStats() || {}
-    return source ? (Array.isArray(source) ? source : [source]) : null
+    return source ? (Array.isArray(source) ? sortIcecastSources(source, sortBy, sortOrder) : [source]) : null
   }
 
   async getSource(mountpoint: string): Promise<IcecastSource | null> {
