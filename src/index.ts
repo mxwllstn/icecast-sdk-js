@@ -38,10 +38,10 @@ export type IcecastSources = IcecastSource[]
 
 export interface GetSourcesOptions {
   sortBy?: keyof IcecastSource
-  sortOrder: 'asc' | 'desc'
+  sortOrder?: 'asc' | 'desc'
 }
 
-const sortIcecastSources = (sources: IcecastSources, field: keyof IcecastSource, sortOrder?: 'asc' | 'desc') => {
+const sortIcecastSources = (sources: IcecastSources, field: keyof IcecastSource, sortOrder = 'asc') => {
   return sortOrder === 'desc'
     ? sources.sort((a: any, b: any) => b[field].localeCompare(a[field]))
     : sources.sort((a: any, b: any) => a[field].localeCompare(b[field]))
