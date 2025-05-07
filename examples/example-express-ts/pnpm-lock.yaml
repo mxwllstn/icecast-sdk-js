@@ -21,8 +21,8 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0
       icecast-sdk-js:
-        specifier: ^1.0.20
-        version: 1.0.20
+        specifier: ^1.0.21
+        version: 1.0.21
       morgan-body:
         specifier: ^2.6.9
         version: 2.6.9
@@ -383,8 +383,8 @@ packages:
     resolution: {integrity: sha512-FtwrG/euBzaEjYeRqOgly7G0qviiXoJWnvEH2Z1plBdXgbyjv34pHTSb9zoeHMyDy33+DWy5Wt9Wo+TURtOYSQ==}
     engines: {node: '>= 0.8'}
 
-  icecast-sdk-js@1.0.20:
-    resolution: {integrity: sha512-D8CCEKQmkAimOVoSMGjQc2HGV1eo0XGm+ioK9Nt3eHI9gJl3SZFE4njvqP6Dj8kTEwtH1puwOPrWWKTMPA7Uhw==}
+  icecast-sdk-js@1.0.21:
+    resolution: {integrity: sha512-uHlfmrPoCzRa/t/siJvoQpxX5ErJJpMpUhGXW7roUqAKKjszpa0KaWptWY1EC4uHkeSsMLYkhCk2c7GJIEfq6w==}
     engines: {node: '>=18'}
 
   iconv-lite@0.6.3:
@@ -908,7 +908,7 @@ snapshots:
       statuses: 2.0.1
       toidentifier: 1.0.1
 
-  icecast-sdk-js@1.0.20: {}
+  icecast-sdk-js@1.0.21: {}
 
   iconv-lite@0.6.3:
     dependencies:

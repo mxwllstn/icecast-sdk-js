@@ -9,15 +9,15 @@ importers:
   .:
     dependencies:
       icecast-sdk-js:
-        specifier: ^1.0.20
-        version: 1.0.20
+        specifier: ^1.0.21
+        version: 1.0.21
 
 packages:
 
-  icecast-sdk-js@1.0.20:
-    resolution: {integrity: sha512-D8CCEKQmkAimOVoSMGjQc2HGV1eo0XGm+ioK9Nt3eHI9gJl3SZFE4njvqP6Dj8kTEwtH1puwOPrWWKTMPA7Uhw==}
+  icecast-sdk-js@1.0.21:
+    resolution: {integrity: sha512-uHlfmrPoCzRa/t/siJvoQpxX5ErJJpMpUhGXW7roUqAKKjszpa0KaWptWY1EC4uHkeSsMLYkhCk2c7GJIEfq6w==}
     engines: {node: '>=18'}
 
 snapshots:
 
-  icecast-sdk-js@1.0.20: {}
+  icecast-sdk-js@1.0.21: {}

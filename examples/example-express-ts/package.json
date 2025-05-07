@@ -17,7 +17,7 @@
     "@types/node": "^22.15.14",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "icecast-sdk-js": "^1.0.20",
+    "icecast-sdk-js": "^1.0.21",
     "morgan-body": "^2.6.9",
     "typescript": "^5.8.3"
   },
