@@ -1,0 +1,15 @@
+{
+  "name": "@example/get-stats",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env --import=tsx ./index.ts"
+  },
+  "dependencies": {
+    "icecast-sdk-js": "^1.0.21"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.4"
+  }
+}

@@ -27,6 +27,8 @@
     "build-clean": "rm -rf dist",
     "build-esm": "tsc --project ./tsconfig.build.json",
     "build-cjs": "rollup dist/index.js --file dist/index.cjs --format cjs",
+    "dev:server": "pnpm --filter @example/server run dev",
+    "dev": "pnpm --filter @example/get-stats run start",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "prepublish": "npm run lint && npm run build",

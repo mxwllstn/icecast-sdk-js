@@ -1,0 +1,20 @@
+{
+  "name": "@example/server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env --import=tsx ./server.ts"
+  },
+  "dependencies": {
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.15.14",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "morgan-body": "^2.6.9",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.4"
+  }
+}

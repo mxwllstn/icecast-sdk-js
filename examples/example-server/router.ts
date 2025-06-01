@@ -1,9 +1,9 @@
 import express, { Router, Request, Response } from 'express'
-import IcecastServer from 'icecast-sdk-js'
+import IcecastServer from '@icecast-sdk-js'
 
-const { IC_HOST, IC_USERNAME, IC_PASSWORD } = process.env || {}
+const { IC_HOST = 'https://stream.sonicscape.land', IC_USERNAME, IC_PASSWORD } = process.env || {}
 
-const ic = new IcecastServer((IC_HOST as string), { username: IC_USERNAME as string, password: IC_PASSWORD as string })
+const ic = new IcecastServer((IC_HOST), { username: IC_USERNAME, password: IC_PASSWORD })
 
 const router = express.Router() as Router
 

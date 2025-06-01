@@ -1,6 +1,6 @@
-import IcecastServer from 'icecast-sdk-js'
+import IcecastServer from '@icecast-sdk-js'
 
-const hostUrl = 'http://locahost:8000'
+const hostUrl = process.env.IC_HOST ?? 'https://stream.sonicscape.land'
 const ic = new IcecastServer(hostUrl)
 
 void (async () => {
