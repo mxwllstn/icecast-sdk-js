@@ -42,7 +42,7 @@ importers:
   examples/example-get-stats:
     dependencies:
       icecast-sdk-js:
-        specifier: ^1.0.22
+        specifier: ^1.0.24
         version: 1.0.24
     devDependencies:
       tsx:
