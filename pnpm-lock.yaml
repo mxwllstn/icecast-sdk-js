@@ -43,7 +43,7 @@ importers:
     dependencies:
       icecast-sdk-js:
         specifier: ^1.0.22
-        version: 1.0.22
+        version: 1.0.24
     devDependencies:
       tsx:
         specifier: ^4.21.0
@@ -914,8 +914,8 @@ packages:
     resolution: {integrity: sha512-4FbRdAX+bSdmo4AUFuS0WNiPz8NgFt+r8ThgNWmlrjQjt1Q7ZR9+zTlce2859x4KSXrwIsaeTqDoKQmtP8pLmQ==}
     engines: {node: '>= 0.8'}
 
-  icecast-sdk-js@1.0.22:
-    resolution: {integrity: sha512-XUqkzkmqmqA+99BIqyPolV6UFmzVdNzU40CSSAGA8ciSQ+3oHs2tuJ8laiJ4/SVhD7xhz0Y5EBqdz9UPAjTQkg==}
+  icecast-sdk-js@1.0.24:
+    resolution: {integrity: sha512-ANP0XnyEWTzwvGmJrLKMeATeu7/Qlrgk5n0F3ips5G6yROPTu1LZfpWHLaAcAjJ3Qxg9QbAcRLa53g0wpEZZWw==}
     engines: {node: '>=18'}
 
   iconv-lite@0.7.1:
@@ -2222,7 +2222,7 @@ snapshots:
       statuses: 2.0.2
       toidentifier: 1.0.1
 
-  icecast-sdk-js@1.0.22: {}
+  icecast-sdk-js@1.0.24: {}
 
   iconv-lite@0.7.1:
     dependencies:
